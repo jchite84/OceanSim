@@ -18,7 +18,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (10, 250)
         self.Cell_Number = 1
-        self.Energy_Level = 10
+        self.Energy_Level = 100
         self.Life = 20
         self.Eye = 0
         self.Organ = 0
@@ -41,8 +41,9 @@ class Player(pygame.sprite.Sprite):
                 self.rect.move_ip(5, 0)
     def Age(self):
         self.Life = self.Life - 1
-        self.Energy_Level = self.Energy_Level - 5
-
+        self.Energy_Level = self.Energy_Level - 1
+        if self.Energy_Level <= 0:
+            self.Life = 0
     
     def Die(self):
         self.Life = 0
@@ -55,7 +56,7 @@ class NPC(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (random.randint(0, 1000), random.randint(0,600))
         self.Cell_Number = 1
-        self.Energy_Level = 10
+        self.Energy_Level = random.randint(50, 250)
         self.Life = random.randint(20, 50)
         self.Eye = 0
         self.Organ = 0
@@ -101,7 +102,9 @@ class NPC(pygame.sprite.Sprite):
          """   
     def Age(self):
         self.Life = self.Life - 1
-        self.Energy_Level = self.Energy_Level - 5
+        self.Energy_Level = self.Energy_Level - 1
+        if self.Energy_Level <= 0:
+            self.Life = 0
     def Die(self):
         self.Life = 0
         
